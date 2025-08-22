@@ -1,0 +1,10 @@
+Flask
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-JWT-Extended
+marshmallow
+marshmallow-sqlalchemy
+psycopg2-binary
+python-dotenv
+Werkzeug
+python-dateutil

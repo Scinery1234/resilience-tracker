@@ -1,0 +1,29 @@
+"""
+Render configuration for deploying the Resilience Tracker API.
+
+This file tells Render how to build and run the Flask application and
+provision a PostgreSQL database. Render will automatically set the
+``DATABASE_URL`` environment variable to point at the provisioned
+database. Adjust the plan names or region as needed.
+"""
+
+services:
+  - type: web
+    name: resilience-tracker
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn resilience_tracker.run:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - fromDatabase:
+          name: resilience-tracker-db
+          property: connectionString
+        key: DATABASE_URL
+
+databases:
+  - name: resilience-tracker-db
+    plan: free
