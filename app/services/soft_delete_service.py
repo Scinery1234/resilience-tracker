@@ -16,8 +16,8 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Iterable
 
-from resilience_tracker.app.models import User, ClientHabit, WeeklyAssessment, HabitScore
-from resilience_tracker.app import db
+from ..models import User, ClientHabit, WeeklyAssessment, HabitScore
+from ..db import db
 
 def soft_delete_client(client: User) -> None:
     """Soft delete a client and all related data.

@@ -9,7 +9,7 @@ scores and trend analysis) easy to unit test.
 Nothing in this package should perform any HTTP handling.
 Instead, services return simple Python data structures or
 database objects, and raise exceptions defined in
-``resilience_tracker.app.errors`` when something goes wrong.
+``app.errors`` when something goes wrong.
 
 The initial version of the application keeps most logic in
 the route handlers themselves. This module provides stub

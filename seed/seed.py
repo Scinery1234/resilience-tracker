@@ -8,8 +8,8 @@ the application context is available.
 """
 from __future__ import annotations
 
-from resilience_tracker.app import create_app, db
-from resilience_tracker.app.models import Habit, User, Role
+from app import create_app, db
+from app.models import Habit, User, Role
 
 def run_seeds() -> None:
     """Insert initial habits and a demo client into the database."""

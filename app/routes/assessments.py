@@ -62,7 +62,7 @@ def update_assessment(assessment_id: int) -> tuple[dict, int]:
     if not _can_access_assessment(assessment):
         return {"error": "Forbidden"}, 403
     data = request.get_json() or {}
-    from resilience_tracker.app.util.sanitization import strip_tags
+    from ..util.sanitization import strip_tags
     if "overall_comment" in data:
         raw_comment = data.get("overall_comment")
         assessment.overall_comment = strip_tags(raw_comment) if raw_comment else None
@@ -137,7 +137,7 @@ def create_score(assessment_id: int) -> tuple[dict, int]:
         return {"error": "score must be a number."}, 400
     if score_num < 0 or score_num > 10:
         return {"error": "score must be between 0 and 10."}, 400
-    from resilience_tracker.app.util.sanitization import strip_tags
+    from ..util.sanitization import strip_tags
     raw_note = data.get("note")
     # Enforce a limit of 7 scores per habit per week (assessment)
     # Count existing active scores for this assessment and client habit
@@ -187,7 +187,7 @@ def update_score(score_id: int) -> tuple[dict, int]:
             return {"error": "score must be between 0 and 10."}, 400
         score.score = new_score
     if "note" in data:
-        from resilience_tracker.app.util.sanitization import strip_tags
+        from ..util.sanitization import strip_tags
         raw_note = data.get("note")
         score.note = strip_tags(raw_note) if raw_note else None
     db.session.commit()

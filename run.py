@@ -4,10 +4,10 @@ Entry point for running the Resilience Tracker Flask application.
 This module imports the application factory and starts the development
 server when executed directly. In production (e.g. when deployed to
 Render), a WSGI server like gunicorn should import ``create_app`` from
-``resilience_tracker.app`` and serve it instead.
+``app`` and serve it instead.
 """
 
-from resilience_tracker.app import create_app, db
+from app import create_app, db
 
 app = create_app()
 

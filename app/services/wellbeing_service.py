@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from resilience_tracker.app.models import WeeklyAssessment
+from ..models import WeeklyAssessment
 
 def compute_wellbeing(assessment: WeeklyAssessment) -> float:
     """Compute the average wellbeing score for a given assessment.
@@ -36,7 +36,7 @@ def compute_wellbeing(assessment: WeeklyAssessment) -> float:
         The recalculated wellbeing score.
     """
     # Import here to avoid circular dependency at import time
-    from resilience_tracker.app.models import HabitScore
+    from ..models import HabitScore
 
     # Only consider scores that have not been soft-deleted
     active_scores = [score for score in assessment.scores if getattr(score, "deleted_at", None) is None]

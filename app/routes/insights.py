@@ -3,7 +3,7 @@
 This blueprint exposes endpoints that compute derived statistics,
 such as a client's wellbeing trend over recent weeks. The heavy
 lifting is delegated to service functions in
-``resilience_tracker.app.services``.
+``app.services``.
 """
 from __future__ import annotations
 

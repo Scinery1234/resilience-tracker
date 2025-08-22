@@ -6,7 +6,7 @@ application. Tests should import the Flask app via the
 isolated execution. Pytest fixtures can help set up the app
 and client contexts.
 """
-from resilience_tracker.app import create_app
+from app import create_app
 
 
 def test_health_endpoint() -> None:
