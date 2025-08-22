@@ -7,4 +7,5 @@ marshmallow-sqlalchemy
 psycopg2-binary
 python-dotenv
 Werkzeug
-python-dateutilgunicorn>=22.0.0
+python-dateutil
+gunicorn>=22.0.0
