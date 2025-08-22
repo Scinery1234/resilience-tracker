@@ -103,7 +103,7 @@ def api_index():
     
     # Provide a simple health check route
     @app.route("/api/health")
-    def health_check() -> dict[str, str]:
+def health_check() -> dict[str, str]:
         """Return a simple health check response.
 
         This endpoint can be used by deployment platforms to verify
