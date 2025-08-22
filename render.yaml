@@ -7,22 +7,20 @@ provision a PostgreSQL database. Render will automatically set the
 database. Adjust the plan names or region as needed.
 """
 
+
 services:
   - type: web
-    name: resilience-tracker
+    name: resilience-tracker-api
     env: python
-    plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn -b 0.0.0.0:$PORT 'app:create_app()'
+    startCommand: gunicorn wsgi:app --bind 0.0.0.0:10000
     envVars:
-      - key: FLASK_ENV
-        value: production
-      - key: JWT_SECRET_KEY
-        generateValue: true
-      - fromDatabase:
-          name: resilience-tracker-db
-          property: connectionString
-        key: DATABASE_URL
+      - key: DATABASE_URL
+        value: postgresql://neondb_owner:npg_kTnIh0xgyHB6@ep-broad-tooth-ad5mhixf-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+      - key: PYTHONPATH
+        value: .
+    healthCheckPath: /health
+    autoDeploy: true
 
 databases:
   - name: resilience-tracker-db
