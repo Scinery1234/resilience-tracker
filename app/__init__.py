@@ -83,6 +83,22 @@ def create_app(test_config: dict | None = None) -> Flask:
     app.register_blueprint(client_habits_bp, url_prefix="/api")
     app.register_blueprint(insights_bp, url_prefix="/api")
 
+def api_index():
+    return {
+        "message": "Resilience Tracker API",
+        "health": "/api/health",
+        "auth": {
+            "register": "/api/register",
+            "login": "/api/login"
+        },
+        "resources": {
+            "clients": "/api/clients",
+            "habits": "/api/habits"
+        }
+    }, 200
+
+    # Provide a simple health check route
+    
     # Provide a simple health check route
     @app.route("/api/health")
     def health_check() -> dict[str, str]:
