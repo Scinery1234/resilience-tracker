@@ -23,6 +23,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
+from flask import jsonify
 
 # instantiate extensions without binding them to an app yet.  They will
 # be bound in create_app().  This pattern avoids issues with circular
@@ -85,6 +86,13 @@ def create_app(test_config: dict | None = None) -> Flask:
 
     return app
 
+@app.get("/")
+def index():
+    return jsonify({
+        "service": "Foundations of Resilience Tracker API",
+        "hint": "Use /api/health, /api/register, /api/login"
+    })
+    
 def api_index():
     return {
         "message": "Resilience Tracker API",
@@ -103,6 +111,7 @@ def api_index():
     
     # Provide a simple health check route
     @app.route("/api/health")
+    
 def health_check() -> dict[str, str]:
         """Return a simple health check response.
 
