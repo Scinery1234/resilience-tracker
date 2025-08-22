@@ -69,8 +69,7 @@ def create_app(test_config: dict | None = None) -> Flask:
     from .errors import register_error_handlers
     register_error_handlers(app)
 
-    # Register blueprints. Importing here avoids circular imports.
-    from .routes.auth import auth_bp
+   from .routes.auth import auth_bp
     from .routes.clients import clients_bp
     from .routes.habits import habits_bp
     from .routes.assessments import assessments_bp
@@ -84,40 +83,17 @@ def create_app(test_config: dict | None = None) -> Flask:
     app.register_blueprint(client_habits_bp, url_prefix="/api")
     app.register_blueprint(insights_bp, url_prefix="/api")
 
-    return app
+    # ---- Friendly root page (optional) ----
+    @app.get("/")
+    def index():
+        return jsonify({
+            "service": "Foundations of Resilience Tracker API",
+            "hint": "Use /api/register, /api/login, /api/clients, /api/habits"
+        })
 
-@app.get("/")
-def index():
-    return jsonify({
-        "service": "Foundations of Resilience Tracker API",
-        "hint": "Use /api/health, /api/register, /api/login"
-    })
-    
-def api_index():
-    return {
-        "message": "Resilience Tracker API",
-        "health": "/api/health",
-        "auth": {
-            "register": "/api/register",
-            "login": "/api/login"
-        },
-        "resources": {
-            "clients": "/api/clients",
-            "habits": "/api/habits"
-        }
-    }, 200
-
-    # Provide a simple health check route
-    
-    # Provide a simple health check route
-    @app.route("/api/health")
-    
-def health_check() -> dict[str, str]:
-        """Return a simple health check response.
-
-        This endpoint can be used by deployment platforms to verify
-        that the application has started correctly.
-        """
+    # ---- Simple health endpoint (optional, safe to keep) ----
+    @app.get("/api/health")
+    def health_check() -> dict[str, str]:
         return {"status": "ok"}
 
     return app
