@@ -69,7 +69,7 @@ def create_app(test_config: dict | None = None) -> Flask:
     from .errors import register_error_handlers
     register_error_handlers(app)
 
-   from .routes.auth import auth_bp
+    from .routes.auth import auth_bp
     from .routes.clients import clients_bp
     from .routes.habits import habits_bp
     from .routes.assessments import assessments_bp
