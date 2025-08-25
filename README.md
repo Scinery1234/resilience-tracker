@@ -108,27 +108,27 @@ error conditions.
 
 The API always returns JSON for errors. This makes it easier for clients and front-ends to understand what went wrong.
 
-# 400 Bad Request – invalid payloads or missing fields.
+- 400 Bad Request – invalid payloads or missing fields.
 
 { "error": "VALIDATION_ERROR", "message": "Score must be between 1 and 10." }
 
 
-# 401 Unauthorized / 403 Forbidden – login required or invalid token.
+- 401 Unauthorized / 403 Forbidden – login required or invalid token.
 
 { "error": "AUTH_ERROR", "message": "Invalid or expired access token." }
 
 
-# 404 Not Found – when a resource doesn’t exist or has been soft-deleted.
+- 404 Not Found – when a resource doesn’t exist or has been soft-deleted.
 
 { "error": "NOT_FOUND", "message": "Client not found." }
 
 
-# 409 Conflict – uniqueness constraint violations (e.g. duplicate email, duplicate habit order).
+- 409 Conflict – uniqueness constraint violations (e.g. duplicate email, duplicate habit order).
 
 { "error": "CONFLICT", "message": "Client already has a habit at order 1." }
 
 
-# 422 Unprocessable Entity – semantically valid but fails business rules (e.g. more than 7 scores in a week).
+- 422 Unprocessable Entity – semantically valid but fails business rules (e.g. more than 7 scores in a week).
 
 { "error": "SEMANTIC_ERROR", "message": "A habit can only have up to 7 scores per week." }
 
